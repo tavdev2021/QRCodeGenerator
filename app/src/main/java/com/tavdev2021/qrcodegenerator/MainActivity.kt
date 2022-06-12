@@ -11,25 +11,19 @@ import android.widget.Toast
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
+import com.tavdev2021.qrcodegenerator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var ivQRcode : ImageView
-    private lateinit var etData : EditText
-    private lateinit var btnGenerateQRCode : Button
-    private lateinit var btnreset : Button
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        ivQRcode = findViewById(R.id.ivQRCode)
-        etData = findViewById(R.id.etDatos)
-        btnGenerateQRCode = findViewById(R.id.btnGenerateQRCode)
-        btnreset = findViewById(R.id.btnreset)
-
-        btnGenerateQRCode.setOnClickListener {
-            val data = etData.text.toString().trim()
+        binding.btnGenerateQRCode.setOnClickListener {
+            val data = binding.etDatos.text.toString().trim()
 
             if (data.isEmpty()){
 
@@ -51,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
-                    ivQRcode.setImageBitmap(bmp)
+                    binding.ivQRCode.setImageBitmap(bmp)
 
                 }catch (e:WriterException){
                     e.printStackTrace()
@@ -60,14 +54,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        btnreset.setOnClickListener {
+        binding.btnreset.setOnClickListener {
             resetValues()
         }
 
     }
 
     private fun resetValues() {
-        ivQRcode.setImageResource(R.drawable.codigoqr)
-        etData.text.clear()
+        binding.ivQRCode.setImageResource(R.drawable.codigoqr)
+        binding.etDatos.text.clear()
     }
 }
