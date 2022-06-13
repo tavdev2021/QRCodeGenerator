@@ -1,5 +1,6 @@
 package com.tavdev2021.qrcodegenerator
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +57,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnreset.setOnClickListener {
             resetValues()
+        }
+
+        binding.btnscancode.setOnClickListener {
+            val i = Intent(this,ScanCodeActivity::class.java)
+            startActivity(i)
         }
 
     }
